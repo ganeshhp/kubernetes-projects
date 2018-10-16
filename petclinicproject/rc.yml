@@ -1,0 +1,24 @@
+# define RC
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: petclinic-rc
+
+# specify RC
+
+spec:
+  replicas: 5
+  selector:
+    app: petclinic
+  template:
+    metadata:
+      labels:
+        app: petclinic
+# specify container. Watch for matching labels
+    spec:
+      containers:
+      - name: petclinic-pod
+        image: ganeshhp/maven-petclinic-project:latest
+        ports:
+        - containerPort: 8080
+

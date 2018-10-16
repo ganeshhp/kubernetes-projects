@@ -1,0 +1,69 @@
+    1  sudo yum install -y yum-utils
+    2  sudo yum install -y device-mapper-persistent-data lvm2
+    3  sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+    4  sudo yum install –y docker-ce
+    5  sudo systemctl enable docker && sudo systemctl start docker 
+    6  docker version
+    7  sudo docker version
+    8  cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
+https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOF
+
+    9  sudo su
+   10  sudo yum update
+   11  setenforce 0
+   12  sudo setenforce 0
+   13  sudo yum install -y kubeadm kubelet
+   14  sudo vi /etc/sysctl.conf
+   15  sudo vi /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+   16  sudo systemctl enable kubelet && sudo systemctl start kubelet
+   17  sudo systemctl status kubelet
+   18  sudo journalctl -xeu kubelet
+   19  sudo kubeadm init
+   20  mkdir -p $HOME/.kube
+   21  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+   22  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+   23  ls
+   24  vi clusterjoin-command
+   25  kubectl get nodes
+   26  kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+   27  kubectl get nodes
+   28  mkdir project
+   29  cd project/
+   30  ls
+   31  vi pod.yml
+   32  kubectl create -f pod.yml 
+   33  kubectl get pods
+   34  kubectl delete -f pod.yml 
+   35  vi rc.yml
+   36  kubectl create -f rc.yml 
+   37  kubectl get pods
+   38  kubectl describe pods
+   39  clear
+   40  ls
+   41  vi service.yml
+   42  kubectl create -f service.yml 
+   43  vi service.yml
+   44  vi deployment.yml
+   45  kubectl delete -f rc.yml 
+   46  kubectl create -f deployment.yml 
+   47  kubectl describe service.yml 
+   48  kubectl describe services
+   49  vi deployment.yml 
+   50  kubectl get pods
+   51  kubectl get services
+   52  kubectl describe service apache-svc
+   53  kubectl delete -f deployment.yml 
+   54  kubectl delete -f service.yml 
+   55  kubectl get all
+   56  clear
+   57  cd ..
+   58  ls -la
+   59  history > all-commands.txt

@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: petclinic-deploy
+spec:
+  replicas: 10
+  minReadySeconds: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 2
+      maxSurge: 2
+  template:
+    metadata:
+      labels:
+        env: prod
+    spec:
+      containers:
+      - name: petclinic-pod
+        image: ganeshhp/maven-petclinic-project:latest
+        ports:
+        - containerPort: 8080
+
