@@ -5,14 +5,15 @@ metadata:
 spec:
   replicas: 5
   selector:
-    app: hello-apache
+        env: dev
   template:
     metadata:
       labels:
-        app: hello-apache
+        zone: prod
+        env: dev
     spec:
       containers:
-      - name: hello-apache-pod
+      - name: apache-pod
         image: httpd:latest
         ports:
         - containerPort: 80

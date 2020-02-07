@@ -1,8 +1,13 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: hello-deploy
+  labels:
+    env: prod
 spec:
+  selector:
+    matchLabels:
+      env: prod      
   replicas: 5
   minReadySeconds: 2
   strategy:
@@ -19,7 +24,7 @@ spec:
     spec:
       containers:
       - name: hello-pod
-        image: httpd:latest
+        image: ganeshhp/customhttpd:latest
         ports:
         - containerPort: 80
 
