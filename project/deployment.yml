@@ -9,7 +9,7 @@ spec:
     matchLabels:
       env: prod      
   replicas: 5
-  minReadySeconds: 2
+  minReadySeconds: 10
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -24,11 +24,12 @@ spec:
     spec:
       containers:
       - name: hello-pod
-        image: ganeshhp/customhttpd:latest
+        image: httpd:latest 
         imagePullPolicy: Always
         ports:
         - containerPort: 80
-          #        resources:
-          #memory: "128Mi"
-          #cpu: "200m"
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
 

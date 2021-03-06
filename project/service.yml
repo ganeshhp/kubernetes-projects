@@ -6,7 +6,7 @@ metadata:
   labels:
     app: hello-apache
     version: v1.1
-    env: dev
+    env: prod
 # define and configure service to acces 80 port
 spec:
   type: NodePort
@@ -15,5 +15,5 @@ spec:
     nodePort: 32400
     protocol: TCP
   selector:
-    env: dev 
+    env: prod
 
