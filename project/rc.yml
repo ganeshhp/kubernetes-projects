@@ -3,7 +3,7 @@ kind: ReplicationController
 metadata:
   name: hello-apache-rc
 spec:
-  replicas: 5
+  replicas: 3
   selector:
         env: dev
   template:
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: apache-pod
-        image: httpd:latest
+        image: ganeshhp/webapplication:1.10
         ports:
         - containerPort: 80
 
