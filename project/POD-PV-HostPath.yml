@@ -5,6 +5,8 @@ metadata:
   labels:
     env: prod
 spec:
+#  nodeSelector:
+#        kubernetes.io/hostname: <hostname>
   volumes:
     - name: hostpath-vol
       hostPath:
