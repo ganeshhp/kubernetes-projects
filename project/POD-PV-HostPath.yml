@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-hostpath
+  labels:
+    env: prod
+spec:
+  volumes:
+    - name: hostpath-vol
+      hostPath:
+        path: /data
+        type: Directory
+  containers:
+    - name: web-service
+      image: httpd:latest
+      volumeMounts:
+        - name: hostpath-vol
+          mountPath: /usr/local/apache2/htdocs
+
