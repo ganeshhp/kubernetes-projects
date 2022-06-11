@@ -28,8 +28,13 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 80
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "200m"
+        livenessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        #resources:
+        #  limits:
+        #    memory: "128Mi"
+        #    cpu: "200m"
 
